@@ -1,1 +1,2 @@
-console.log("hel")
+import createBackground from "./home";
+createBackground();
