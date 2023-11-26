@@ -1,2 +1,3 @@
-import createBackground from "./home";
+import { createBackground, requestData } from "./home";
 createBackground();
+requestData();
