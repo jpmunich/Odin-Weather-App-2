@@ -4,4 +4,11 @@ const createElement = (type, parent) => {
   return element;
 };
 
-export { createElement };
+const createTextElement = (type, parent, text) => {
+  const element = document.createElement(type);
+  parent.appendChild(element);
+  element.innerText = text;
+  return element;
+};
+
+export { createElement, createTextElement };
