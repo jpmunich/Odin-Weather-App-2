@@ -42,24 +42,27 @@ const createWeatherCell = (parent, imgSrc, infoTypeText, infoText) => {
   infoType.classList.add("info-text");
   const info = createTextElement("h3", textContainer, `${infoText}`);
   info.classList.add("info-text");
+
+  return info;
 };
 
-const createForecastCell = (parent) => {
+const createForecastCell = (parent, imgSrc, dayText, highText, lowText) => {
   const container = createElementWithClass(
     "div",
     parent,
     "forecast-cell-container"
   );
-  const day = createTextElement("h4", container, "Monday");
-  const temperatureHigh = createTextElement("h2", container, "43 °F");
-  const temperatureLow = createTextElement("h6", container, "41 °F");
+  const day = createTextElement("h4", container, dayText);
+  const temperatureHigh = createTextElement("h2", container, `${highText} °F`);
+  const temperatureLow = createTextElement("h6", container, `${lowText} °F`);
   const forecastImage = createElementWithClass(
     "img",
     container,
     "forecast-img"
   );
-  forecastImage.src = "../dist/images/cloudy.svg";
+  forecastImage.src = imgSrc;
 };
+
 export {
   createElement,
   createTextElement,
