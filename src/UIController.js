@@ -18,10 +18,10 @@ const createElementWithClass = (type, parent, className) => {
   return element;
 };
 
-const createWeatherCell = () => {
+const createWeatherCell = (parent) => {
   const container = createElementWithClass(
     "div",
-    document.getElementById("content"),
+    parent,
     "weather-cell-container"
   );
   const iconContainer = createElementWithClass(
@@ -42,6 +42,9 @@ const createWeatherCell = () => {
   const info = createTextElement("h3", textContainer, "17°F");
 };
 
-createWeatherCell();
-
-export { createElement, createTextElement, createElementWithClass };
+export {
+  createElement,
+  createTextElement,
+  createElementWithClass,
+  createWeatherCell,
+};

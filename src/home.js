@@ -2,8 +2,10 @@ import {
   createElement,
   createTextElement,
   createElementWithClass,
+  createWeatherCell,
 } from "./UIController.js";
 const content = document.getElementById("content");
+const topContent = createElementWithClass("div", content, "top-content");
 
 function createBackground() {
   document.getElementById("content").style.backgroundImage =
@@ -11,7 +13,11 @@ function createBackground() {
 }
 
 function createNav() {
-  const navContainer = createElementWithClass("div", content, "nav-container");
+  const navContainer = createElementWithClass(
+    "div",
+    topContent,
+    "nav-container"
+  );
 
   createTextElement("h1", navContainer, "Cloudy");
   createTextElement("h4", navContainer, "Seattle");
@@ -38,5 +44,20 @@ function createNav() {
   );
   searchBar.src = "../dist/images/search.svg";
 }
+
+function createWeatherCellGrid() {
+  const cellContainer = createElementWithClass(
+    "div",
+    topContent,
+    "cell-container"
+  );
+
+  createWeatherCell(cellContainer);
+  createWeatherCell(cellContainer);
+  createWeatherCell(cellContainer);
+  createWeatherCell(cellContainer);
+}
 createNav();
+createWeatherCellGrid();
+
 export { createBackground, createNav };
