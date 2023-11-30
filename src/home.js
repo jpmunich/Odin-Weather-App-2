@@ -118,7 +118,7 @@ function updateCellValues(temp, humidity, visibility, wind) {
   windCell.innerText = `${wind} mph`;
 }
 
-function createForecast() {
+function createForecast(highs, lows) {
   const toggleContainer = createElementWithClass(
     "div",
     content,
@@ -143,55 +143,73 @@ function createForecast() {
     forecastContainer,
     "../dist/images/cloudy.svg",
     "Sunday",
-    "43",
-    "40"
+    highs[0],
+    lows[0]
   );
   createForecastCell(
     forecastContainer,
     "../dist/images/cloudy.svg",
     "Monday",
-    "43",
-    "41"
+    highs[1],
+    lows[1]
   );
   createForecastCell(
     forecastContainer,
     "../dist/images/cloudy.svg",
     "Tuesday",
-    "44",
-    "41"
+    highs[2],
+    lows[2]
   );
   createForecastCell(
     forecastContainer,
     "../dist/images/cloudy.svg",
     "Wednesday",
-    "53",
-    "48"
+    highs[3],
+    lows[3]
   );
   createForecastCell(
     forecastContainer,
     "../dist/images/cloudy.svg",
     "Thursday",
-    "40",
-    "39"
+    highs[4],
+    lows[4]
   );
   createForecastCell(
     forecastContainer,
     "../dist/images/cloudy.svg",
     "Friday",
-    "38",
-    "35"
+    highs[5],
+    lows[5]
   );
   createForecastCell(
     forecastContainer,
     "../dist/images/cloudy.svg",
     "Saturday",
-    "43",
-    "40"
+    highs[6],
+    lows[6]
   );
+}
+
+function updateForecastValues(highs, lows) {
+  for (
+    let i = 0;
+    i < document.getElementsByClassName("temp-high").length;
+    i++
+  ) {
+    document.getElementsByClassName("temp-high")[
+      i
+    ].innerText = `${highs[i]} °F`;
+    document.getElementsByClassName("temp-low")[i].innerText = `${lows[i]} °F`;
+  }
 }
 
 createNav("Cloudy", "Seattle", "Monday, 27th Nov 2023 8:27 pm", "47");
 createWeatherCellGrid(17, "58%", "10000m", "14 mph");
-createForecast();
+createForecast([43, 44, 45, 46, 47, 42, 39], [39, 40, 42, 42, 42, 39, 34]);
 
-export { createBackground, updateNavValues, updateCellValues };
+export {
+  createBackground,
+  updateNavValues,
+  updateCellValues,
+  updateForecastValues,
+};

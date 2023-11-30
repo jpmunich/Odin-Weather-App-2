@@ -54,7 +54,10 @@ const createForecastCell = (parent, imgSrc, dayText, highText, lowText) => {
   );
   const day = createTextElement("h4", container, dayText);
   const temperatureHigh = createTextElement("h2", container, `${highText} °F`);
+  temperatureHigh.classList.add("temp-high");
   const temperatureLow = createTextElement("h6", container, `${lowText} °F`);
+  temperatureLow.classList.add("temp-low");
+
   const forecastImage = createElementWithClass(
     "img",
     container,
