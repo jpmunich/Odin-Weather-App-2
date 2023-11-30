@@ -49,3 +49,14 @@ input::placeholder {
 .search-img {
   height: 25px;
 }
+
+.weather-cell-container {
+  display: flex;
+  gap: 1px;
+  align-items: center;
+  padding: 5px;
+}
+
+.weather-cell-img {
+  height: 32px;
+}
