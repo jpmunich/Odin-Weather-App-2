@@ -67,37 +67,55 @@ function updateNavValues(weatherDescription, city, date, temperature) {
   dateText.innerText = date;
   tempuratureText.innerText = `${temperature} °F`;
 }
-function createWeatherCellGrid() {
+function createWeatherCellGrid(temp, humidity, visibility, wind) {
   const cellContainer = createElementWithClass(
     "div",
     topContent,
     "cell-container"
   );
 
-  createWeatherCell(
+  const feelsLikeCell = createWeatherCell(
     cellContainer,
     "../dist/images/thermometer.svg",
     "Feels Like",
-    "17 °F"
+    `${temp} °F`
   );
-  createWeatherCell(
+  feelsLikeCell.setAttribute("id", "feels-like-cell");
+
+  const humidityCell = createWeatherCell(
     cellContainer,
     "../dist/images/droplet.svg",
     "Humidity",
-    "69%"
+    humidity
   );
-  createWeatherCell(
+  humidityCell.setAttribute("id", "humidity-cell");
+
+  const visibilityCell = createWeatherCell(
     cellContainer,
     "../dist/images/cloud-rain.svg",
-    "Chance of Rain",
-    "69%"
+    "Visibility",
+    visibility
   );
-  createWeatherCell(
+  visibilityCell.setAttribute("id", "visibility-cell");
+
+  const windCell = createWeatherCell(
     cellContainer,
     "../dist/images/wind.svg",
     "Wind Speed",
-    "14.5 mph"
+    wind
   );
+  windCell.setAttribute("id", "wind-cell");
+}
+
+function updateCellValues(temp, humidity, visibility, wind) {
+  const feelsLikeCell = document.getElementById("feels-like-cell");
+  feelsLikeCell.innerText = `${temp} °F`;
+  const humidityCell = document.getElementById("humidity-cell");
+  humidityCell.innerText = `${humidity}%`;
+  const visibilityCell = document.getElementById("visibility-cell");
+  visibilityCell.innerText = `${visibility}m`;
+  const windCell = document.getElementById("wind-cell");
+  windCell.innerText = `${wind} mph`;
 }
 
 function createForecast() {
@@ -121,17 +139,59 @@ function createForecast() {
     content,
     "forecast-container"
   );
-  createForecastCell(forecastContainer);
-  createForecastCell(forecastContainer);
-  createForecastCell(forecastContainer);
-  createForecastCell(forecastContainer);
-  createForecastCell(forecastContainer);
-  createForecastCell(forecastContainer);
-  createForecastCell(forecastContainer);
+  createForecastCell(
+    forecastContainer,
+    "../dist/images/cloudy.svg",
+    "Sunday",
+    "43",
+    "40"
+  );
+  createForecastCell(
+    forecastContainer,
+    "../dist/images/cloudy.svg",
+    "Monday",
+    "43",
+    "41"
+  );
+  createForecastCell(
+    forecastContainer,
+    "../dist/images/cloudy.svg",
+    "Tuesday",
+    "44",
+    "41"
+  );
+  createForecastCell(
+    forecastContainer,
+    "../dist/images/cloudy.svg",
+    "Wednesday",
+    "53",
+    "48"
+  );
+  createForecastCell(
+    forecastContainer,
+    "../dist/images/cloudy.svg",
+    "Thursday",
+    "40",
+    "39"
+  );
+  createForecastCell(
+    forecastContainer,
+    "../dist/images/cloudy.svg",
+    "Friday",
+    "38",
+    "35"
+  );
+  createForecastCell(
+    forecastContainer,
+    "../dist/images/cloudy.svg",
+    "Saturday",
+    "43",
+    "40"
+  );
 }
 
 createNav("Cloudy", "Seattle", "Monday, 27th Nov 2023 8:27 pm", "47");
-createWeatherCellGrid();
+createWeatherCellGrid(17, "58%", "10000m", "14 mph");
 createForecast();
 
-export { createBackground, updateNavValues };
+export { createBackground, updateNavValues, updateCellValues };
