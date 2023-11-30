@@ -10,8 +10,7 @@ const content = document.getElementById("content");
 const topContent = createElementWithClass("div", content, "top-content");
 
 function createBackground() {
-  document.getElementById("content").style.backgroundImage =
-    "url(../dist/images/landscape.jpg)";
+  content.style.backgroundImage = "url(../dist/images/landscape.jpg)";
 }
 
 function createNav(weatherDescription, city, date, temperature) {
@@ -21,9 +20,13 @@ function createNav(weatherDescription, city, date, temperature) {
     "nav-container"
   );
 
-  createTextElement("h1", navContainer, weatherDescription);
-  createTextElement("h4", navContainer, city);
-  createTextElement("p", navContainer, date);
+  const weatherText = createTextElement("h1", navContainer, weatherDescription);
+  weatherText.setAttribute("id", "weather-description-text");
+  const cityText = createTextElement("h4", navContainer, city);
+  cityText.setAttribute("id", "city-description-text");
+  const dateText = createTextElement("p", navContainer, date);
+  dateText.setAttribute("id", "date-description-text");
+
   const temperatureText = createTextElement(
     "h1",
     navContainer,
@@ -52,6 +55,18 @@ function createNav(weatherDescription, city, date, temperature) {
   searchBar.src = "../dist/images/search.svg";
 }
 
+function updateNavValues(weatherDescription, city, date, temperature) {
+  const weatherText = document.getElementById("weather-description-text");
+  const cityText = document.getElementById("city-description-text");
+  const dateText = document.getElementById("date-description-text");
+  const tempuratureText =
+    document.getElementsByClassName("temperature-text")[0];
+
+  weatherText.innerText = weatherDescription;
+  cityText.innerText = city;
+  dateText.innerText = date;
+  tempuratureText.innerText = `${temperature} °F`;
+}
 function createWeatherCellGrid() {
   const cellContainer = createElementWithClass(
     "div",
@@ -59,10 +74,30 @@ function createWeatherCellGrid() {
     "cell-container"
   );
 
-  createWeatherCell(cellContainer);
-  createWeatherCell(cellContainer);
-  createWeatherCell(cellContainer);
-  createWeatherCell(cellContainer);
+  createWeatherCell(
+    cellContainer,
+    "../dist/images/thermometer.svg",
+    "Feels Like",
+    "17 °F"
+  );
+  createWeatherCell(
+    cellContainer,
+    "../dist/images/droplet.svg",
+    "Humidity",
+    "69%"
+  );
+  createWeatherCell(
+    cellContainer,
+    "../dist/images/cloud-rain.svg",
+    "Chance of Rain",
+    "69%"
+  );
+  createWeatherCell(
+    cellContainer,
+    "../dist/images/wind.svg",
+    "Wind Speed",
+    "14.5 mph"
+  );
 }
 
 function createForecast() {
@@ -99,4 +134,4 @@ createNav("Cloudy", "Seattle", "Monday, 27th Nov 2023 8:27 pm", "47");
 createWeatherCellGrid();
 createForecast();
 
-export { createBackground, createNav };
+export { createBackground, updateNavValues };

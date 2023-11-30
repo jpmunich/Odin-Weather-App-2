@@ -18,7 +18,7 @@ const createElementWithClass = (type, parent, className) => {
   return element;
 };
 
-const createWeatherCell = (parent) => {
+const createWeatherCell = (parent, imgSrc, infoTypeText, infoText) => {
   const container = createElementWithClass(
     "div",
     parent,
@@ -36,10 +36,12 @@ const createWeatherCell = (parent) => {
   );
 
   const icon = createElementWithClass("img", iconContainer, "weather-cell-img");
-  icon.src = "../dist/images/thermometer.svg";
+  icon.src = imgSrc;
 
-  const infoType = createTextElement("h6", textContainer, "Feels Like");
-  const info = createTextElement("h3", textContainer, "17 °F");
+  const infoType = createTextElement("h6", textContainer, infoTypeText);
+  infoType.classList.add("info-text");
+  const info = createTextElement("h3", textContainer, `${infoText}`);
+  info.classList.add("info-text");
 };
 
 const createForecastCell = (parent) => {
