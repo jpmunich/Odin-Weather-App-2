@@ -11,4 +11,11 @@ const createTextElement = (type, parent, text) => {
   return element;
 };
 
-export { createElement, createTextElement };
+const createElementWithClass = (type, parent, className) => {
+  const element = document.createElement(type);
+  element.classList.add(className);
+  parent.appendChild(element);
+  return element;
+};
+
+export { createElement, createTextElement, createElementWithClass };
