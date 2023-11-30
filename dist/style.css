@@ -71,14 +71,21 @@ input::placeholder {
 }
 
 .weather-cell-container {
+  height: auto;
   display: flex;
-  gap: 1px;
+  gap: 0.5rem;
   align-items: center;
-  padding: 5px;
+  padding: 7.5px;
 }
 
 .weather-cell-img {
   height: 32px;
+}
+
+.info-text {
+  position: relative;
+  bottom: 3px;
+  padding: 1px;
 }
 
 .toggle-container {
