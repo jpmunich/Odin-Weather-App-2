@@ -18,4 +18,30 @@ const createElementWithClass = (type, parent, className) => {
   return element;
 };
 
+const createWeatherCell = () => {
+  const container = createElementWithClass(
+    "div",
+    document.getElementById("content"),
+    "weather-cell-container"
+  );
+  const iconContainer = createElementWithClass(
+    "div",
+    container,
+    "icon-container"
+  );
+  const textContainer = createElementWithClass(
+    "div",
+    container,
+    "weather-text-container"
+  );
+
+  const icon = createElementWithClass("img", iconContainer, "weather-cell-img");
+  icon.src = "../dist/images/thermometer.svg";
+
+  const infoType = createTextElement("h6", textContainer, "Feels Like");
+  const info = createTextElement("h3", textContainer, "17°F");
+};
+
+createWeatherCell();
+
 export { createElement, createTextElement, createElementWithClass };
