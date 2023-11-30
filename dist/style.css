@@ -16,12 +16,22 @@
   background-size: cover;
 }
 
-input {
-  padding: 1em;
+.nav-container {
+  padding: 3em;
 }
 
 button {
   padding: 1em 1.5em;
+}
+
+.temperature-text {
+  padding: 20px 0 0 0;
+}
+
+.weather-img {
+  width: 5rem;
+  padding-bottom: 10px;
+  display: block;
 }
 
 .search-container {
@@ -36,6 +46,7 @@ button {
 }
 
 input {
+  display: block;
   padding: 0px;
   background-color: transparent;
   border: none;

@@ -11,18 +11,21 @@ function createBackground() {
 }
 
 function createNav() {
-  createTextElement("h1", content, "Cloudy");
-  createTextElement("h4", content, "Seattle");
-  createTextElement("p", content, "Monday, 27th Nov 2023 8:27 pm");
-  createTextElement("h1", content, "47 °F");
-  createTextElement("p", content, "Display: °F");
+  const navContainer = createElementWithClass("div", content, "nav-container");
 
-  const weather = createElementWithClass("img", content, "weather-img");
+  createTextElement("h1", navContainer, "Cloudy");
+  createTextElement("h4", navContainer, "Seattle");
+  createTextElement("p", navContainer, "Monday, 27th Nov 2023 8:27 pm");
+  const temperatureText = createTextElement("h1", navContainer, "47 °F");
+  temperatureText.classList.add("temperature-text");
+  createTextElement("p", navContainer, "Display: °F");
+
+  const weather = createElementWithClass("img", navContainer, "weather-img");
   weather.src = "../dist/images/cloudy.svg";
 
   const searchContainer = createElementWithClass(
     "div",
-    content,
+    navContainer,
     "search-container"
   );
   const search = createElement("input", searchContainer);
