@@ -1,3 +1,5 @@
+import { updateNavValues } from "./home";
+
 const key = "170fee3662f94ec3d6b36434fe3d4c00";
 
 async function requestData(city) {
@@ -5,12 +7,17 @@ async function requestData(city) {
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`
   );
   const json = await response.json();
-  const { timezone, visibility, main } = json;
+  const { timezone, visibility, main, weather, name } = json;
 
-  timezoneText.innerText = timezone;
-  visibilityText.innerText = visibility;
   console.log(main);
+  console.log(weather[0].description);
   console.log(json);
+  updateNavValues(
+    weather[0].description,
+    name,
+    "Monday, 27th Nov 2023 8:27 pm",
+    main.temp
+  );
 }
 
 async function requestForecast(city) {
@@ -29,6 +36,9 @@ async function requestForecast(city) {
   console.log(json);
 }
 
-requestForecast("Seattle");
-
-export { createBackground, requestData };
+document.getElementById("search-bar").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    requestData(document.getElementById("search-bar").value);
+  }
+});
+export { requestData, requestForecast };
