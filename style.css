@@ -16,8 +16,17 @@
   background-size: cover;
 }
 
+.top-content {
+  display: flex;
+  justify-content: space-between;
+}
+
 .nav-container {
   padding: 3em;
+}
+
+.cell-container {
+  padding: 3em 6em;
 }
 
 button {
