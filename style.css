@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Cinzel";
+  color: whitesmoke;
 }
 
 #content {
@@ -21,4 +22,30 @@ input {
 
 button {
   padding: 1em 1.5em;
+}
+
+.search-container {
+  display: flex;
+  border-bottom: 3px solid whitesmoke;
+  display: inline-flex;
+  padding: 7.5px;
+}
+
+.search-container > * {
+  justify-content: center;
+}
+
+input {
+  padding: 0px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+input::placeholder {
+  color: whitesmoke;
+}
+
+.search-img {
+  height: 25px;
 }
