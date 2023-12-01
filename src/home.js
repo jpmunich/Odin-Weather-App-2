@@ -145,7 +145,7 @@ function createWeatherCellGrid(
 
   const visibilityCell = createWeatherCell(
     rightCellcontainer,
-    "../dist/images/cloud-rain.svg",
+    "../dist/images/eye.svg",
     "Visibility",
     visibility
   );
