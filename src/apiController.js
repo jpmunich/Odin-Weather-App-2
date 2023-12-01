@@ -2,6 +2,7 @@ import {
   updateCellValues,
   updateForecastValues,
   updateNavValues,
+  updateForecastDay,
 } from "./home";
 
 const key = "170fee3662f94ec3d6b36434fe3d4c00";
@@ -11,16 +12,12 @@ async function requestData(city) {
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`
   );
   const json = await response.json();
-  const { visibility, timezone, main, weather, name, wind } = json;
+  const { visibility, timezone, main, weather, name, wind, dt } = json;
 
-  console.log(main);
-  console.log(json);
-  updateNavValues(
-    weather[0].description,
-    name,
-    "Monday, 27th Nov 2023 8:27 pm",
-    Math.round(main.temp)
-  );
+  const day = new Date(dt * 1000 + timezone * 1000).getDay();
+  const date = new Date(dt * 1000 + timezone * 1000).toUTCString().slice(0, 22);
+
+  updateNavValues(weather[0].description, name, date, Math.round(main.temp));
   const sunset = new Date(json.sys.sunset * 1000 + timezone * 1000)
     .toUTCString()
     .slice(-12, -7);
@@ -28,7 +25,7 @@ async function requestData(city) {
   const sunrise = new Date(json.sys.sunrise * 1000 + timezone * 1000)
     .toUTCString()
     .slice(-12, -7);
-  console.log(sunset, sunrise);
+
   updateCellValues(
     sunrise,
     sunset,
@@ -39,6 +36,16 @@ async function requestData(city) {
     visibility,
     Math.round(wind.speed)
   );
+
+  updateForecastDay([
+    day,
+    day + 1,
+    day + 2,
+    day + 3,
+    day + 4,
+    day + 5,
+    day + 6,
+  ]);
 }
 
 async function requestForecast(city) {
@@ -51,10 +58,10 @@ async function requestForecast(city) {
     list,
   } = json;
 
-  console.log(list);
+  console.log(json);
   const highs = [
-    Math.round(list[0].main.temp_max),
-    Math.round(list[7].main.temp_max),
+    Math.round(list[1].main.temp_max),
+    Math.round(list[9].main.temp_max),
     Math.round(list[15].main.temp_max),
     Math.round(list[23].main.temp_max),
     Math.round(list[31].main.temp_max),
@@ -62,14 +69,15 @@ async function requestForecast(city) {
     Math.round(list[39].main.temp_max),
   ];
   const lows = [
-    Math.round(list[0].main.temp_min),
-    Math.round(list[7].main.temp_min),
+    Math.round(list[1].main.temp_min),
+    Math.round(list[9].main.temp_min),
     Math.round(list[15].main.temp_min),
     Math.round(list[23].main.temp_min),
     Math.round(list[31].main.temp_min),
     Math.round(list[39].main.temp_min),
     Math.round(list[39].main.temp_min),
   ];
+
   updateForecastValues(highs, lows);
 }
 

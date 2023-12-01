@@ -261,15 +261,21 @@ function createForecast(highs, lows) {
 }
 
 function updateForecastValues(highs, lows) {
-  for (
-    let i = 0;
-    i < document.getElementsByClassName("temp-high").length;
-    i++
-  ) {
-    document.getElementsByClassName("temp-high")[
-      i
-    ].innerText = `${highs[i]} °F`;
+  for (let i = 0; i < document.getElementsByClassName("temp-high").length; i++) {
+    document.getElementsByClassName("temp-high")[i].innerText = `${highs[i]} °F`;
     document.getElementsByClassName("temp-low")[i].innerText = `${lows[i]} °F`;
+  }
+}
+
+function updateForecastDay(day) {
+  for (let i = 0; i < document.getElementsByClassName("temp-high").length; i++) {
+    if (day[i] % 7 === 0) document.getElementsByClassName("forecast-day")[i].innerText = `Sunday`;
+    else if (day[i] % 7 === 1) document.getElementsByClassName("forecast-day")[i].innerText = `Monday`;
+    else if (day[i] % 7 === 2) document.getElementsByClassName("forecast-day")[i].innerText = `Tuesday`;
+    else if (day[i] & 7 === 3) document.getElementsByClassName("forecast-day")[i].innerText = `Wednesday`;
+    else if (day[i] % 7 === 4) document.getElementsByClassName("forecast-day")[i].innerText = `Thursday`;
+    else if (day[i] % 7 === 5) document.getElementsByClassName("forecast-day")[i].innerText = `Friday`;
+    else if (day[i] % 7 === 6) document.getElementsByClassName("forecast-day")[i].innerText = `Saturday`;
   }
 }
 
@@ -284,11 +290,16 @@ createWeatherCellGrid(
   "10000m",
   "14 mph"
 );
-createForecast([43, 44, 45, 46, 47, 42, 39], [39, 40, 42, 42, 42, 39, 34]);
+createForecast(
+  [43, 44, 45, 46, 47, 42, 39],
+  [39, 40, 42, 42, 42, 39, 34],
+  ["", "", "", "", "", "", ""]
+);
 
 export {
   createBackground,
   updateNavValues,
   updateCellValues,
   updateForecastValues,
+  updateForecastDay,
 };
