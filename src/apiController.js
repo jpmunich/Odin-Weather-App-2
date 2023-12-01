@@ -37,7 +37,7 @@ async function requestData(city) {
     main.feels_like,
     main.humidity,
     visibility,
-    wind.speed
+    Math.round(wind.speed)
   );
 }
 
