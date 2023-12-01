@@ -11,10 +11,9 @@ async function requestData(city) {
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`
   );
   const json = await response.json();
-  const { visibility, rain, main, weather, name, wind } = json;
+  const { visibility, timezone, main, weather, name, wind } = json;
 
   console.log(main);
-  console.log(rain);
   console.log(json);
   updateNavValues(
     weather[0].description,
@@ -22,7 +21,24 @@ async function requestData(city) {
     "Monday, 27th Nov 2023 8:27 pm",
     main.temp
   );
-  updateCellValues(main.feels_like, main.humidity, visibility, wind.speed);
+  const sunset = new Date(json.sys.sunset * 1000 + timezone * 1000)
+    .toUTCString()
+    .slice(-12, -7);
+
+  const sunrise = new Date(json.sys.sunrise * 1000 + timezone * 1000)
+    .toUTCString()
+    .slice(-12, -7);
+  console.log(sunset, sunrise);
+  updateCellValues(
+    sunrise,
+    sunset,
+    main.pressure,
+    wind.deg,
+    main.feels_like,
+    main.humidity,
+    visibility,
+    wind.speed
+  );
 }
 
 async function requestForecast(city) {

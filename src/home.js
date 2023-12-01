@@ -67,15 +67,68 @@ function updateNavValues(weatherDescription, city, date, temperature) {
   dateText.innerText = date;
   tempuratureText.innerText = `${temperature} °F`;
 }
-function createWeatherCellGrid(temp, humidity, visibility, wind) {
+function createWeatherCellGrid(
+  sunrise,
+  sunset,
+  pressure,
+  windDirection,
+  temp,
+  humidity,
+  visibility,
+  wind
+) {
   const cellContainer = createElementWithClass(
     "div",
     topContent,
     "cell-container"
   );
 
-  const feelsLikeCell = createWeatherCell(
+  const leftCellContainer = createElementWithClass(
+    "div",
     cellContainer,
+    "left-cell-container"
+  );
+
+  const rightCellcontainer = createElementWithClass(
+    "div",
+    cellContainer,
+    "right-cell-container"
+  );
+
+  const sunriseCell = createWeatherCell(
+    leftCellContainer,
+    "../dist/images/sunrise.svg",
+    "Sunrise",
+    sunrise
+  );
+  sunriseCell.setAttribute("id", "sunrise-cell");
+
+  const sunsetCell = createWeatherCell(
+    leftCellContainer,
+    "../dist/images/sunset.svg",
+    "Sunset",
+    sunset
+  );
+  sunsetCell.setAttribute("id", "sunset-cell");
+
+  const pressureCell = createWeatherCell(
+    leftCellContainer,
+    "../dist/images/target.svg",
+    "Pressure",
+    pressure
+  );
+  pressureCell.setAttribute("id", "pressure-cell");
+
+  const windDirectionCell = createWeatherCell(
+    leftCellContainer,
+    "../dist/images/wind.svg",
+    "Wind Direction",
+    windDirection
+  );
+  windDirectionCell.setAttribute("id", "wind-direction-cell");
+
+  const feelsLikeCell = createWeatherCell(
+    rightCellcontainer,
     "../dist/images/thermometer.svg",
     "Feels Like",
     `${temp} °F`
@@ -83,7 +136,7 @@ function createWeatherCellGrid(temp, humidity, visibility, wind) {
   feelsLikeCell.setAttribute("id", "feels-like-cell");
 
   const humidityCell = createWeatherCell(
-    cellContainer,
+    rightCellcontainer,
     "../dist/images/droplet.svg",
     "Humidity",
     humidity
@@ -91,7 +144,7 @@ function createWeatherCellGrid(temp, humidity, visibility, wind) {
   humidityCell.setAttribute("id", "humidity-cell");
 
   const visibilityCell = createWeatherCell(
-    cellContainer,
+    rightCellcontainer,
     "../dist/images/cloud-rain.svg",
     "Visibility",
     visibility
@@ -99,7 +152,7 @@ function createWeatherCellGrid(temp, humidity, visibility, wind) {
   visibilityCell.setAttribute("id", "visibility-cell");
 
   const windCell = createWeatherCell(
-    cellContainer,
+    rightCellcontainer,
     "../dist/images/wind.svg",
     "Wind Speed",
     wind
@@ -107,7 +160,24 @@ function createWeatherCellGrid(temp, humidity, visibility, wind) {
   windCell.setAttribute("id", "wind-cell");
 }
 
-function updateCellValues(temp, humidity, visibility, wind) {
+function updateCellValues(
+  sunrise,
+  sunset,
+  pressure,
+  windDirection,
+  temp,
+  humidity,
+  visibility,
+  wind
+) {
+  const sunriseCell = document.getElementById("sunrise-cell");
+  sunriseCell.innerText = `${sunrise}`;
+  const sunsetCell = document.getElementById("sunset-cell");
+  sunsetCell.innerText = `${sunset}`;
+  const pressureCell = document.getElementById("pressure-cell");
+  pressureCell.innerText = `${pressure}mb`;
+  const windDirectionCell = document.getElementById("wind-direction-cell");
+  windDirectionCell.innerText = `${windDirection}°`;
   const feelsLikeCell = document.getElementById("feels-like-cell");
   feelsLikeCell.innerText = `${temp} °F`;
   const humidityCell = document.getElementById("humidity-cell");
@@ -204,7 +274,16 @@ function updateForecastValues(highs, lows) {
 }
 
 createNav("Cloudy", "Seattle", "Monday, 27th Nov 2023 8:27 pm", "47");
-createWeatherCellGrid(17, "58%", "10000m", "14 mph");
+createWeatherCellGrid(
+  "7:30",
+  "8:00",
+  "1040",
+  "100°",
+  17,
+  "58%",
+  "10000m",
+  "14 mph"
+);
 createForecast([43, 44, 45, 46, 47, 42, 39], [39, 40, 42, 42, 42, 39, 34]);
 
 export {
