@@ -34,7 +34,7 @@ async function requestData(city) {
     sunset,
     main.pressure,
     wind.deg,
-    main.feels_like,
+    Math.round(main.feels_like),
     main.humidity,
     visibility,
     Math.round(wind.speed)
