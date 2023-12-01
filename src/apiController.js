@@ -19,7 +19,7 @@ async function requestData(city) {
     weather[0].description,
     name,
     "Monday, 27th Nov 2023 8:27 pm",
-    main.temp
+    Math.round(main.temp)
   );
   const sunset = new Date(json.sys.sunset * 1000 + timezone * 1000)
     .toUTCString()
