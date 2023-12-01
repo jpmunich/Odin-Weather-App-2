@@ -1,4 +1,8 @@
-import { updateCellValues, updateNavValues } from "./home";
+import {
+  updateCellValues,
+  updateForecastValues,
+  updateNavValues,
+} from "./home";
 
 const key = "170fee3662f94ec3d6b36434fe3d4c00";
 
@@ -28,18 +32,35 @@ async function requestForecast(city) {
   const json = await response.json();
   const {
     city: { sunset },
+    list,
   } = json;
-  console.log(sunset);
-  const sunsetTime = sunset * 1000;
-  console.log(sunsetTime);
-  const date = new Date(sunsetTime).toUTCString();
-  console.log(date);
-  console.log(json);
+
+  console.log(list);
+  const highs = [
+    Math.round(list[0].main.temp_max),
+    Math.round(list[7].main.temp_max),
+    Math.round(list[15].main.temp_max),
+    Math.round(list[23].main.temp_max),
+    Math.round(list[31].main.temp_max),
+    Math.round(list[39].main.temp_max),
+    Math.round(list[39].main.temp_max),
+  ];
+  const lows = [
+    Math.round(list[0].main.temp_min),
+    Math.round(list[7].main.temp_min),
+    Math.round(list[15].main.temp_min),
+    Math.round(list[23].main.temp_min),
+    Math.round(list[31].main.temp_min),
+    Math.round(list[39].main.temp_min),
+    Math.round(list[39].main.temp_min),
+  ];
+  updateForecastValues(highs, lows);
 }
 
 document.getElementById("search-bar").addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     requestData(document.getElementById("search-bar").value);
+    requestForecast(document.getElementById("search-bar").value);
   }
 });
 export { requestData, requestForecast };
