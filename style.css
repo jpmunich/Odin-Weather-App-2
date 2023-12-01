@@ -26,6 +26,7 @@
 }
 
 .cell-container {
+  display: flex;
   padding: 3em 6em;
 }
 
@@ -106,4 +107,8 @@ input::placeholder {
   display: flex;
   justify-content: space-around;
   padding: 1.2rem;
+}
+
+.forecast-cell-container {
+  width: 6%;
 }
