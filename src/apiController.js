@@ -6,10 +6,12 @@ import {
 } from "./home";
 
 const key = "170fee3662f94ec3d6b36434fe3d4c00";
+let units = 'imperial';
+let selectedCity = 'Seattle';
 
 async function requestData(city) {
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=${units}`
   );
   const json = await response.json();
   const { visibility, timezone, main, weather, name, wind, dt } = json;
@@ -48,7 +50,7 @@ async function requestData(city) {
 
 async function requestForecast(city) {
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=imperial`
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=${units}`
     );
   const json = await response.json();
   const {
@@ -75,8 +77,16 @@ async function requestForecast(city) {
 
 document.getElementById("search-bar").addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    requestData(document.getElementById("search-bar").value);
-    requestForecast(document.getElementById("search-bar").value);
+      selectedCity = document.getElementById("search-bar").value;
+    requestData(selectedCity);
+    requestForecast(selectedCity);
   }
 });
+
+document.getElementById('toggle-units').addEventListener('click', () => {
+    if (units === 'imperial') units = 'metric'
+    else if (units === 'metric') units = 'imperial';
+    requestData(selectedCity);
+    requestForecast(selectedCity);
+})
 export { requestData, requestForecast };

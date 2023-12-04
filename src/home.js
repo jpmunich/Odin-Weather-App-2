@@ -6,6 +6,8 @@ import {
   createForecastCell,
 } from "./UIController.js";
 
+let units = 'imperial';
+
 const content = document.getElementById("content");
 const topContent = createElementWithClass("div", content, "top-content");
 
@@ -32,9 +34,20 @@ function createNav(weatherDescription, city, date, temperature) {
     navContainer,
     `${temperature} °F`
   );
+
   temperatureText.classList.add("temperature-text");
   const toggleUnits = createTextElement('button', navContainer, "Display: °F");
   toggleUnits.setAttribute('id', 'toggle-units');
+  toggleUnits.addEventListener('click', () => {
+      if (units === 'imperial') {
+        units = 'metric';
+          toggleUnits.innerText = `Display: °C`;
+        }
+      else if (units === 'metric') {
+        units = 'imperial';
+        toggleUnits.innerText = `Display: °F`;
+      } 
+  })
 
 
   const weather = createElementWithClass("img", navContainer, "weather-img");
@@ -61,14 +74,15 @@ function updateNavValues(weatherDescription, city, date, temperature) {
   const weatherText = document.getElementById("weather-description-text");
   const cityText = document.getElementById("city-description-text");
   const dateText = document.getElementById("date-description-text");
-  const tempuratureText =
-    document.getElementsByClassName("temperature-text")[0];
+  const tempuratureText = document.getElementsByClassName("temperature-text")[0];
 
   weatherText.innerText = weatherDescription;
   cityText.innerText = city;
   dateText.innerText = date;
-  tempuratureText.innerText = `${temperature} °F`;
+  if (units === 'imperial') tempuratureText.innerText = `${temperature} °F`;
+  else if (units === 'metric') tempuratureText.innerText = `${temperature} °C`;
 }
+
 function createWeatherCellGrid(
   sunrise,
   sunset,
@@ -181,13 +195,16 @@ function updateCellValues(
   const windDirectionCell = document.getElementById("wind-direction-cell");
   windDirectionCell.innerText = `${windDirection}°`;
   const feelsLikeCell = document.getElementById("feels-like-cell");
-  feelsLikeCell.innerText = `${temp} °F`;
+  if (units === 'imperial') feelsLikeCell.innerText = `${temp} °F`;
+  else if (units === 'metric') feelsLikeCell.innerText = `${temp} °C`;
+
   const humidityCell = document.getElementById("humidity-cell");
   humidityCell.innerText = `${humidity}%`;
   const visibilityCell = document.getElementById("visibility-cell");
   visibilityCell.innerText = `${visibility}m`;
   const windCell = document.getElementById("wind-cell");
-  windCell.innerText = `${wind} mph`;
+  if (units === 'imperial') windCell.innerText = `${wind}mph`;
+  else if (units === 'metric') windCell.innerText = `${wind} m/s`;
 }
 
 function createForecast(highs, lows) {
@@ -250,8 +267,14 @@ function createForecast(highs, lows) {
 
 function updateForecastValues(highs, lows) {
   for (let i = 0; i < document.getElementsByClassName("temp-high").length; i++) {
-    document.getElementsByClassName("temp-high")[i].innerText = `${highs[i]} °F`;
-    document.getElementsByClassName("temp-low")[i].innerText = `${lows[i]} °F`;
+    if (units === 'imperial') {
+        document.getElementsByClassName("temp-high")[i].innerText = `${highs[i]} °F`;
+        document.getElementsByClassName("temp-low")[i].innerText = `${lows[i]} °F`;
+    }
+    else if (units === 'metric') {
+        document.getElementsByClassName("temp-high")[i].innerText = `${highs[i]} °C`;
+        document.getElementsByClassName("temp-low")[i].innerText = `${lows[i]} °C`;
+    }
   }
 }
 
