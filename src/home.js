@@ -216,13 +216,9 @@ function createForecast(highs, lows) {
   const toggleForecastDaily = createTextElement(
     "button",
     toggleContainer,
-    "Daily"
+    "Daily Forecast"
   );
-  const toggleForecastHourly = createTextElement(
-    "button",
-    toggleContainer,
-    "hourly"
-  );
+
   const forecastContainer = createElementWithClass(
     "div",
     content,
