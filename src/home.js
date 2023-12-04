@@ -33,7 +33,9 @@ function createNav(weatherDescription, city, date, temperature) {
     `${temperature} °F`
   );
   temperatureText.classList.add("temperature-text");
-  createTextElement("p", navContainer, "Display: °F");
+  const toggleUnits = createTextElement('button', navContainer, "Display: °F");
+  toggleUnits.setAttribute('id', 'toggle-units');
+
 
   const weather = createElementWithClass("img", navContainer, "weather-img");
   weather.src = "../dist/images/cloudy.svg";
@@ -244,20 +246,6 @@ function createForecast(highs, lows) {
     highs[4],
     lows[4]
   );
-  createForecastCell(
-    forecastContainer,
-    "../dist/images/cloudy.svg",
-    "Friday",
-    highs[5],
-    lows[5]
-  );
-  createForecastCell(
-    forecastContainer,
-    "../dist/images/cloudy.svg",
-    "Saturday",
-    highs[6],
-    lows[6]
-  );
 }
 
 function updateForecastValues(highs, lows) {
@@ -272,7 +260,7 @@ function updateForecastDay(day) {
     if (day[i] % 7 === 0) document.getElementsByClassName("forecast-day")[i].innerText = `Sunday`;
     else if (day[i] % 7 === 1) document.getElementsByClassName("forecast-day")[i].innerText = `Monday`;
     else if (day[i] % 7 === 2) document.getElementsByClassName("forecast-day")[i].innerText = `Tuesday`;
-    else if (day[i] & 7 === 3) document.getElementsByClassName("forecast-day")[i].innerText = `Wednesday`;
+    else if (day[i] % 7 === 3) document.getElementsByClassName("forecast-day")[i].innerText = `Wednesday`;
     else if (day[i] % 7 === 4) document.getElementsByClassName("forecast-day")[i].innerText = `Thursday`;
     else if (day[i] % 7 === 5) document.getElementsByClassName("forecast-day")[i].innerText = `Friday`;
     else if (day[i] % 7 === 6) document.getElementsByClassName("forecast-day")[i].innerText = `Saturday`;
@@ -293,7 +281,6 @@ createWeatherCellGrid(
 createForecast(
   [43, 44, 45, 46, 47, 42, 39],
   [39, 40, 42, 42, 42, 39, 34],
-  ["", "", "", "", "", "", ""]
 );
 
 export {

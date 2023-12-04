@@ -38,35 +38,29 @@ async function requestData(city) {
   );
 
   updateForecastDay([
-    day,
     day + 1,
     day + 2,
     day + 3,
     day + 4,
     day + 5,
-    day + 6,
   ]);
 }
 
 async function requestForecast(city) {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=imperial`
-  );
+    );
   const json = await response.json();
   const {
-    city: { sunset },
-    list,
+    list
   } = json;
 
-  console.log(json);
   const highs = [
     Math.round(list[1].main.temp_max),
     Math.round(list[9].main.temp_max),
     Math.round(list[15].main.temp_max),
     Math.round(list[23].main.temp_max),
     Math.round(list[31].main.temp_max),
-    Math.round(list[39].main.temp_max),
-    Math.round(list[39].main.temp_max),
   ];
   const lows = [
     Math.round(list[1].main.temp_min),
@@ -74,8 +68,6 @@ async function requestForecast(city) {
     Math.round(list[15].main.temp_min),
     Math.round(list[23].main.temp_min),
     Math.round(list[31].main.temp_min),
-    Math.round(list[39].main.temp_min),
-    Math.round(list[39].main.temp_min),
   ];
 
   updateForecastValues(highs, lows);
