@@ -124,3 +124,97 @@ input::placeholder {
 .temp-high {
   white-space: nowrap;
 }
+
+@media screen and (max-width: 832px) {
+  h1 {
+    font-size: 1.8rem;  
+  }
+
+  .forecast-container {
+    width: auto;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .forecast-cell-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .forecast-day {
+    margin-right: 150px;
+  }
+
+  #toggle-forecast-daily {
+    position: relative;
+    right: 22.5%;
+    margin: 0 auto;
+  }
+
+  .toggle-container {
+    margin-top: 25px;
+  }
+
+  .cell-container {
+    display: block;
+    padding: 2em 3em;
+  }
+
+  .weather-cell-img {
+    height: 28px;
+  }
+
+  .weather-text-container > h3 {
+    font-size: 1rem;
+  }
+
+  .weather-text-container > h6 {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (max-width: 498px) {
+  .nav-container {
+    padding: 2rem;
+    width: 60%;
+  }
+  .forecast-day {
+    margin-right: 50px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  input {
+    width: 8em;
+  }
+
+  #city-description-text, #date-description-text {
+    font-size: 1rem;
+  }
+
+  #weather-description-text {
+    padding-bottom: 0.4em;
+  }
+
+  .cell-container {
+    display: block;
+    padding: 1.5em 3em;
+  }
+
+  .weather-cell-img {
+    height: 28px;
+  }
+
+  .weather-text-container > h3 {
+    font-size: 1rem;
+  }
+
+  .weather-text-container > h6 {
+    font-size: 0.6rem;
+  }
+}
