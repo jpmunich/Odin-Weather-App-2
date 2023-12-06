@@ -127,7 +127,7 @@ input::placeholder {
 
 @media screen and (max-width: 832px) {
   h1 {
-    font-size: 1.8rem;  
+    font-size: 1.8rem;
   }
 
   .forecast-container {
@@ -193,7 +193,8 @@ input::placeholder {
     width: 8em;
   }
 
-  #city-description-text, #date-description-text {
+  #city-description-text,
+  #date-description-text {
     font-size: 1rem;
   }
 
