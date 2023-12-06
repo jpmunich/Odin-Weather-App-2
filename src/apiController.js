@@ -3,6 +3,7 @@ import {
   updateForecastValues,
   updateNavValues,
   updateForecastDay,
+  updateBackground
 } from "./home";
 
 const key = "170fee3662f94ec3d6b36434fe3d4c00";
@@ -17,9 +18,12 @@ async function requestData(city) {
   const { visibility, timezone, main, weather, name, wind, dt } = json;
 
   const day = new Date(dt * 1000 + timezone * 1000).getDay();
+  const hour = new Date(dt * 1000 + timezone * 1000).getUTCHours();
+  console.log(hour)
   const date = new Date(dt * 1000 + timezone * 1000).toUTCString().slice(0, 22);
 
   updateNavValues(weather[0].description, name, date, Math.round(main.temp));
+
   const sunset = new Date(json.sys.sunset * 1000 + timezone * 1000)
     .toUTCString()
     .slice(-12, -7);
@@ -46,6 +50,10 @@ async function requestData(city) {
     day + 4,
     day + 5,
   ]);
+
+  updateBackground(weather[0].main, hour);
+
+  console.log(json)
 }
 
 async function requestForecast(city) {

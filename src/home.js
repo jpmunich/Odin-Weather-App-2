@@ -15,6 +15,25 @@ function createBackground() {
   content.style.backgroundImage = "url(../dist/images/landscape.jpg)";
 }
 
+function updateBackground(weather, time) {
+    const random = Math.floor(Math.random() * 2);
+    console.log(random);
+    if (weather === 'Rain' || weather === 'Drizzle') content.style.backgroundImage = `url(../dist/images/rain.jpg)`;
+    else if (weather === 'Clear') content.style.backgroundImage = `url(../dist/images/landscape.jpg)`;
+    else if (weather === 'Thunderstorm' && random === 0) content.style.backgroundImage = `url(../dist/images/lightning-strike.jpg)`;
+    else if (weather === 'Thunderstorm' && random === 1) content.style.backgroundImage = `url(../dist/images/lightning.jpg)`;
+    else if (weather === 'Mist' || weather === 'Fog') content.style.backgroundImage = `url(../dist/images/cloudy-forest.jpg)`;
+    else if (weather === 'Clouds') content.style.backgroundImage = `url(../dist/images/cloudy-day.jpg)`;
+    else if (weather === 'Smoke' || weather === 'Haze') content.style.backgroundImage = `url(../dist/images/cloudy-forest.jpg)`;
+    else if (weather === 'Dust' || weather === 'Sand') content.style.backgroundImage = `url(../dist/images/desert.jpg)`;
+    else if (weather === 'Snow' && random === 0) content.style.backgroundImage = `url(../dist/images/snow.jpg)`;
+    else if (weather === 'Snow' && random === 1) content.style.backgroundImage = `url(../dist/images/snowy-forest.jpg)`;
+    else {content.style.backgroundImage = `url(../dist/images/landscape.jpg)`}
+
+    if (weather === 'Clear' && (time >= 19 || time <= 8)) content.style.backgroundImage = `url(../dist/images/night-time.jpg)`;
+
+  }
+
 function createNav(weatherDescription, city, date, temperature) {
   const navContainer = createElementWithClass(
     "div",
@@ -218,12 +237,14 @@ function createForecast(highs, lows) {
     toggleContainer,
     "Daily Forecast"
   );
+  toggleForecastDaily.setAttribute('id', 'toggle-forecast-daily');
 
   const forecastContainer = createElementWithClass(
     "div",
     content,
     "forecast-container"
   );
+
   createForecastCell(
     forecastContainer,
     "../dist/images/cloudy.svg",
@@ -308,4 +329,5 @@ export {
   updateCellValues,
   updateForecastValues,
   updateForecastDay,
+  updateBackground
 };
