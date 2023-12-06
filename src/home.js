@@ -6,7 +6,7 @@ import {
   createForecastCell,
 } from "./UIController.js";
 
-let units = 'imperial';
+let units = "imperial";
 
 const content = document.getElementById("content");
 const topContent = createElementWithClass("div", content, "top-content");
@@ -16,23 +16,35 @@ function createBackground() {
 }
 
 function updateBackground(weather, time) {
-    const random = Math.floor(Math.random() * 2);
-    console.log(random);
-    if (weather === 'Rain' || weather === 'Drizzle') content.style.backgroundImage = `url(../dist/images/rain.jpg)`;
-    else if (weather === 'Clear') content.style.backgroundImage = `url(../dist/images/landscape.jpg)`;
-    else if (weather === 'Thunderstorm' && random === 0) content.style.backgroundImage = `url(../dist/images/lightning-strike.jpg)`;
-    else if (weather === 'Thunderstorm' && random === 1) content.style.backgroundImage = `url(../dist/images/lightning.jpg)`;
-    else if (weather === 'Mist' || weather === 'Fog') content.style.backgroundImage = `url(../dist/images/cloudy-forest.jpg)`;
-    else if (weather === 'Clouds') content.style.backgroundImage = `url(../dist/images/cloudy-day.jpg)`;
-    else if (weather === 'Smoke' || weather === 'Haze') content.style.backgroundImage = `url(../dist/images/cloudy-forest.jpg)`;
-    else if (weather === 'Dust' || weather === 'Sand') content.style.backgroundImage = `url(../dist/images/desert.jpg)`;
-    else if (weather === 'Snow' && random === 0) content.style.backgroundImage = `url(../dist/images/snow.jpg)`;
-    else if (weather === 'Snow' && random === 1) content.style.backgroundImage = `url(../dist/images/snowy-forest.jpg)`;
-    else {content.style.backgroundImage = `url(../dist/images/landscape.jpg)`}
-
-    if (weather === 'Clear' && (time >= 19 || time <= 8)) content.style.backgroundImage = `url(../dist/images/night-time.jpg)`;
-
+  const random = Math.floor(Math.random() * 2);
+  console.log(random);
+  if (weather === "Rain" || weather === "Drizzle")
+    content.style.backgroundImage = `url(../dist/images/rain.jpg)`;
+  else if (weather === "Clear")
+    content.style.backgroundImage = `url(../dist/images/landscape.jpg)`;
+  else if (weather === "Thunderstorm" && random === 0)
+    content.style.backgroundImage = `url(../dist/images/lightning-strike.jpg)`;
+  else if (weather === "Thunderstorm" && random === 1)
+    content.style.backgroundImage = `url(../dist/images/lightning.jpg)`;
+  else if (weather === "Mist" || weather === "Fog")
+    content.style.backgroundImage = `url(../dist/images/cloudy-forest.jpg)`;
+  else if (weather === "Clouds")
+    content.style.backgroundImage = `url(../dist/images/cloudy-day.jpg)`;
+  else if (weather === "Smoke" || weather === "Haze")
+    content.style.backgroundImage = `url(../dist/images/cloudy-forest.jpg)`;
+  else if (weather === "Dust" || weather === "Sand")
+    content.style.backgroundImage = `url(../dist/images/desert.jpg)`;
+  else if (weather === "Snow" && random === 0)
+    content.style.backgroundImage = `url(../dist/images/snow.jpg)`;
+  else if (weather === "Snow" && random === 1)
+    content.style.backgroundImage = `url(../dist/images/snowy-forest.jpg)`;
+  else {
+    content.style.backgroundImage = `url(../dist/images/landscape.jpg)`;
   }
+
+  if (weather === "Clear" && (time >= 19 || time <= 8))
+    content.style.backgroundImage = `url(../dist/images/night-time.jpg)`;
+}
 
 function createNav(weatherDescription, city, date, temperature) {
   const navContainer = createElementWithClass(
@@ -55,19 +67,17 @@ function createNav(weatherDescription, city, date, temperature) {
   );
 
   temperatureText.classList.add("temperature-text");
-  const toggleUnits = createTextElement('button', navContainer, "Display: °F");
-  toggleUnits.setAttribute('id', 'toggle-units');
-  toggleUnits.addEventListener('click', () => {
-      if (units === 'imperial') {
-        units = 'metric';
-          toggleUnits.innerText = `Display: °C`;
-        }
-      else if (units === 'metric') {
-        units = 'imperial';
-        toggleUnits.innerText = `Display: °F`;
-      } 
-  })
-
+  const toggleUnits = createTextElement("button", navContainer, "Display: °F");
+  toggleUnits.setAttribute("id", "toggle-units");
+  toggleUnits.addEventListener("click", () => {
+    if (units === "imperial") {
+      units = "metric";
+      toggleUnits.innerText = `Display: °C`;
+    } else if (units === "metric") {
+      units = "imperial";
+      toggleUnits.innerText = `Display: °F`;
+    }
+  });
 
   const weather = createElementWithClass("img", navContainer, "weather-img");
   weather.src = "../dist/images/cloudy.svg";
@@ -93,13 +103,14 @@ function updateNavValues(weatherDescription, city, date, temperature) {
   const weatherText = document.getElementById("weather-description-text");
   const cityText = document.getElementById("city-description-text");
   const dateText = document.getElementById("date-description-text");
-  const tempuratureText = document.getElementsByClassName("temperature-text")[0];
+  const tempuratureText =
+    document.getElementsByClassName("temperature-text")[0];
 
   weatherText.innerText = weatherDescription;
   cityText.innerText = city;
   dateText.innerText = date;
-  if (units === 'imperial') tempuratureText.innerText = `${temperature} °F`;
-  else if (units === 'metric') tempuratureText.innerText = `${temperature} °C`;
+  if (units === "imperial") tempuratureText.innerText = `${temperature} °F`;
+  else if (units === "metric") tempuratureText.innerText = `${temperature} °C`;
 }
 
 function createWeatherCellGrid(
@@ -214,16 +225,16 @@ function updateCellValues(
   const windDirectionCell = document.getElementById("wind-direction-cell");
   windDirectionCell.innerText = `${windDirection}°`;
   const feelsLikeCell = document.getElementById("feels-like-cell");
-  if (units === 'imperial') feelsLikeCell.innerText = `${temp} °F`;
-  else if (units === 'metric') feelsLikeCell.innerText = `${temp} °C`;
+  if (units === "imperial") feelsLikeCell.innerText = `${temp} °F`;
+  else if (units === "metric") feelsLikeCell.innerText = `${temp} °C`;
 
   const humidityCell = document.getElementById("humidity-cell");
   humidityCell.innerText = `${humidity}%`;
   const visibilityCell = document.getElementById("visibility-cell");
   visibilityCell.innerText = `${visibility}m`;
   const windCell = document.getElementById("wind-cell");
-  if (units === 'imperial') windCell.innerText = `${wind}mph`;
-  else if (units === 'metric') windCell.innerText = `${wind} m/s`;
+  if (units === "imperial") windCell.innerText = `${wind}mph`;
+  else if (units === "metric") windCell.innerText = `${wind} m/s`;
 }
 
 function createForecast(highs, lows) {
@@ -237,7 +248,7 @@ function createForecast(highs, lows) {
     toggleContainer,
     "Daily Forecast"
   );
-  toggleForecastDaily.setAttribute('id', 'toggle-forecast-daily');
+  toggleForecastDaily.setAttribute("id", "toggle-forecast-daily");
 
   const forecastContainer = createElementWithClass(
     "div",
@@ -283,27 +294,51 @@ function createForecast(highs, lows) {
 }
 
 function updateForecastValues(highs, lows) {
-  for (let i = 0; i < document.getElementsByClassName("temp-high").length; i++) {
-    if (units === 'imperial') {
-        document.getElementsByClassName("temp-high")[i].innerText = `${highs[i]} °F`;
-        document.getElementsByClassName("temp-low")[i].innerText = `${lows[i]} °F`;
-    }
-    else if (units === 'metric') {
-        document.getElementsByClassName("temp-high")[i].innerText = `${highs[i]} °C`;
-        document.getElementsByClassName("temp-low")[i].innerText = `${lows[i]} °C`;
+  for (
+    let i = 0;
+    i < document.getElementsByClassName("temp-high").length;
+    i++
+  ) {
+    if (units === "imperial") {
+      document.getElementsByClassName("temp-high")[
+        i
+      ].innerText = `${highs[i]} °F`;
+      document.getElementsByClassName("temp-low")[
+        i
+      ].innerText = `${lows[i]} °F`;
+    } else if (units === "metric") {
+      document.getElementsByClassName("temp-high")[
+        i
+      ].innerText = `${highs[i]} °C`;
+      document.getElementsByClassName("temp-low")[
+        i
+      ].innerText = `${lows[i]} °C`;
     }
   }
 }
 
 function updateForecastDay(day) {
-  for (let i = 0; i < document.getElementsByClassName("temp-high").length; i++) {
-    if (day[i] % 7 === 0) document.getElementsByClassName("forecast-day")[i].innerText = `Sunday`;
-    else if (day[i] % 7 === 1) document.getElementsByClassName("forecast-day")[i].innerText = `Monday`;
-    else if (day[i] % 7 === 2) document.getElementsByClassName("forecast-day")[i].innerText = `Tuesday`;
-    else if (day[i] % 7 === 3) document.getElementsByClassName("forecast-day")[i].innerText = `Wednesday`;
-    else if (day[i] % 7 === 4) document.getElementsByClassName("forecast-day")[i].innerText = `Thursday`;
-    else if (day[i] % 7 === 5) document.getElementsByClassName("forecast-day")[i].innerText = `Friday`;
-    else if (day[i] % 7 === 6) document.getElementsByClassName("forecast-day")[i].innerText = `Saturday`;
+  for (
+    let i = 0;
+    i < document.getElementsByClassName("temp-high").length;
+    i++
+  ) {
+    if (day[i] % 7 === 0)
+      document.getElementsByClassName("forecast-day")[i].innerText = `Sunday`;
+    else if (day[i] % 7 === 1)
+      document.getElementsByClassName("forecast-day")[i].innerText = `Monday`;
+    else if (day[i] % 7 === 2)
+      document.getElementsByClassName("forecast-day")[i].innerText = `Tuesday`;
+    else if (day[i] % 7 === 3)
+      document.getElementsByClassName("forecast-day")[
+        i
+      ].innerText = `Wednesday`;
+    else if (day[i] % 7 === 4)
+      document.getElementsByClassName("forecast-day")[i].innerText = `Thursday`;
+    else if (day[i] % 7 === 5)
+      document.getElementsByClassName("forecast-day")[i].innerText = `Friday`;
+    else if (day[i] % 7 === 6)
+      document.getElementsByClassName("forecast-day")[i].innerText = `Saturday`;
   }
 }
 
@@ -318,10 +353,7 @@ createWeatherCellGrid(
   "10000m",
   "14 mph"
 );
-createForecast(
-  [43, 44, 45, 46, 47, 42, 39],
-  [39, 40, 42, 42, 42, 39, 34],
-);
+createForecast([43, 44, 45, 46, 47, 42, 39], [39, 40, 42, 42, 42, 39, 34]);
 
 export {
   createBackground,
@@ -329,5 +361,5 @@ export {
   updateCellValues,
   updateForecastValues,
   updateForecastDay,
-  updateBackground
+  updateBackground,
 };
