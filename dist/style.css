@@ -41,8 +41,10 @@ button {
 
 #toggle-units {
   background-color: transparent;
-  border: none;
-  padding: 2px 0;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 6px 12px;
+  margin: 5px 0px 20px 0px;
 }
 
 .weather-img {

@@ -16,34 +16,48 @@ function createBackground() {
 }
 
 function updateBackground(weather, time) {
+  const weatherSVG = document.getElementsByClassName("weather-img")[0];
   const random = Math.floor(Math.random() * 2);
   console.log(random);
-  if (weather === "Rain" || weather === "Drizzle")
+  if (weather === "Rain" || weather === "Drizzle") {
     content.style.backgroundImage = `url(../dist/images/rain.jpg)`;
-  else if (weather === "Clear")
+    weatherSVG.src = "../dist/images/cloud-rain.svg";
+  } else if (weather === "Clear") {
     content.style.backgroundImage = `url(../dist/images/landscape.jpg)`;
-  else if (weather === "Thunderstorm" && random === 0)
+    weatherSVG.src = "../dist/images/sun.svg";
+  } else if (weather === "Thunderstorm" && random === 0) {
     content.style.backgroundImage = `url(../dist/images/lightning-strike.jpg)`;
-  else if (weather === "Thunderstorm" && random === 1)
+    weatherSVG.src = "../dist/images/cloud-lightning.svg";
+  } else if (weather === "Thunderstorm" && random === 1) {
     content.style.backgroundImage = `url(../dist/images/lightning.jpg)`;
-  else if (weather === "Mist" || weather === "Fog")
+    weatherSVG.src = "../dist/images/cloud-lightning.svg";
+  } else if (weather === "Mist" || weather === "Fog") {
     content.style.backgroundImage = `url(../dist/images/cloudy-forest.jpg)`;
-  else if (weather === "Clouds")
+    weatherSVG.src = "../dist/images/droplet.svg";
+  } else if (weather === "Clouds") {
     content.style.backgroundImage = `url(../dist/images/cloudy-day.jpg)`;
-  else if (weather === "Smoke" || weather === "Haze")
+    weatherSVG.src = "../dist/images/cloudy.svg";
+  } else if (weather === "Smoke" || weather === "Haze") {
     content.style.backgroundImage = `url(../dist/images/cloudy-forest.jpg)`;
-  else if (weather === "Dust" || weather === "Sand")
+    weatherSVG.src = "../dist/images/alert-triangle.svg";
+  } else if (weather === "Dust" || weather === "Sand") {
     content.style.backgroundImage = `url(../dist/images/desert.jpg)`;
-  else if (weather === "Snow" && random === 0)
+    weatherSVG.src = "../dist/images/sun.svg";
+  } else if (weather === "Snow" && random === 0) {
     content.style.backgroundImage = `url(../dist/images/snow.jpg)`;
-  else if (weather === "Snow" && random === 1)
+    weatherSVG.src = "../dist/images/snowflake.svg";
+  } else if (weather === "Snow" && random === 1) {
     content.style.backgroundImage = `url(../dist/images/snowy-forest.jpg)`;
-  else {
+    weatherSVG.src = "../dist/images/snowflake.svg";
+  } else {
     content.style.backgroundImage = `url(../dist/images/landscape.jpg)`;
+    weatherSVG.src = "../dist/images/sun.svg";
   }
 
-  if (weather === "Clear" && (time >= 19 || time <= 8))
+  if (weather === "Clear" && (time >= 19 || time <= 8)) {
     content.style.backgroundImage = `url(../dist/images/night-time.jpg)`;
+    weatherSVG.src = "../dist/images/moon.svg";
+  }
 }
 
 function createNav(weatherDescription, city, date, temperature) {
